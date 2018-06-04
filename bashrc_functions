@@ -1,0 +1,40 @@
+#for PS
+fadeOut(){
+        for i in {16..20} {21..16} ; do echo -en "\e[48;5;${i}m \e[0m" ; done ; echo
+}
+
+#find new aliases with this. Gives top 10 most used commands in history
+findNewAliases(){
+	history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
+}
+
+
+#ps that will not show grep
+pss () {
+  if [ -z “$1” ]
+  then
+    ps -ajx | grep -i “$1” | grep -v “grep” | sed G
+  else
+    ps -ajx
+  fi
+}
+
+#make directory and cd in $1 is the name parameter, can build parent directors
+mkd () {
+	mkdir -p $1
+	cd $1
+}
+
+#show alias given some part of it
+showa () {
+	/usr/bin/grep --color=always -i -a1 $@ ~/.bash_profile | grep -v '^\s*$';
+}
+
+#go to last modified directory
+cdl()
+{
+        last_dir="$(ls -Frt | grep '/$' | tail -n1)"
+        if [ -d "$last_dir" ]; then
+                cd "$last_dir"
+        fi
+}
