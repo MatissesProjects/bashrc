@@ -1,7 +1,7 @@
 # bashrc
 These are my current bashrc settings
 
-For mac I have decided that it is best to separate the logic out into different files
+This requires a bash_aliases line in the bashrc of linux
 
 ## bash_aliases
 Houses aliases and quick modifications to the bash profile
